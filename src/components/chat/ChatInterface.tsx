@@ -43,8 +43,7 @@ const ChatInterface: React.FC = () => {
 
   const toggleVoiceInput = () => {
     setIsListening(!isListening);
-    // Here you would implement actual voice recognition
-    // For now, we'll just simulate it with a timeout
+    // Simulated voice input
     if (!isListening) {
       setTimeout(() => {
         setInput(prev => prev + "Voice input would appear here... ");
@@ -70,8 +69,12 @@ const ChatInterface: React.FC = () => {
                 transition={{ duration: 0.5 }}
                 className="mb-6"
               >
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-white text-3xl font-bold">N</span>
+                <div className="w-20 h-20 mx-auto mb-4">
+                  <img
+                    src="/navie-icon.png"
+                    alt="Navie AI Icon"
+                    className="w-20 h-20 rounded-full object-cover"
+                  />
                 </div>
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
                   Welcome to Navie AI
@@ -106,7 +109,7 @@ const ChatInterface: React.FC = () => {
           <div ref={messagesEndRef} />
         </div>
       </div>
-      
+
       {/* Input area */}
       <div className="border-t dark:border-gray-700 p-4 bg-white dark:bg-gray-900">
         <div className="max-w-3xl mx-auto">
