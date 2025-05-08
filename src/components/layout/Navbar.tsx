@@ -44,18 +44,20 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
               </motion.div>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <button
-                onClick={() => onExternalLinkClick("https://yovel.vercel.app")}
-                className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-              >
-                Home
-              </button>
-              <button
-                onClick={() => scrollToSection('features')}
-                className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-              >
-                Features
-              </button>
+  <a
+    href="/"
+    className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+  >
+    Home
+  </a>
+
+  <a
+    href="/#features"
+    className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+  >
+    Features
+  </a>
+
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -112,7 +114,7 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
         <div className="pt-2 pb-3 space-y-1">
           <button
             onClick={() => {
-              onExternalLinkClick("https://yovel.vercel.app");
+              onExternalLinkClick("https://navieai.vercel.app/");
               setIsMenuOpen(false);
             }}
             className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
