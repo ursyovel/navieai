@@ -16,10 +16,6 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -33,7 +29,7 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
         <div className="flex justify-between h-16">
           {/* Logo and main nav links */}
           <div className="flex items-center">
-            <Link to="/" onClick={scrollToTop} className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex-shrink-0 flex items-center">
               <motion.div 
                 className="flex items-center"
                 whileHover={{ scale: 1.05 }}
@@ -48,10 +44,16 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
               </motion.div>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <button onClick={scrollToTop} className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              <button
+                onClick={() => onExternalLinkClick("https://yovel.vercel.app")}
+                className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+              >
                 Home
               </button>
-              <button onClick={() => scrollToSection('features')} className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+              <button
+                onClick={() => scrollToSection('features')}
+                className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+              >
                 Features
               </button>
               <motion.button 
@@ -108,13 +110,29 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
         }}
       >
         <div className="pt-2 pb-3 space-y-1">
-          <button onClick={() => { scrollToTop(); setIsMenuOpen(false); }} className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800">
+          <button
+            onClick={() => {
+              onExternalLinkClick("https://yovel.vercel.app");
+              setIsMenuOpen(false);
+            }}
+            className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+          >
             Home
           </button>
-          <button onClick={() => { scrollToSection('features'); setIsMenuOpen(false); }} className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800">
+          <button
+            onClick={() => {
+              scrollToSection('features');
+              setIsMenuOpen(false);
+            }}
+            className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+          >
             Features
           </button>
-          <Link to="/chat" onClick={() => setIsMenuOpen(false)} className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800">
+          <Link
+            to="/chat"
+            onClick={() => setIsMenuOpen(false)}
+            className="block w-full text-left pl-3 pr-4 py-2 border-l-4 border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800"
+          >
             Chat Now
           </Link>
           <button 
@@ -132,9 +150,7 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
         </div>
         <div className="pt-4 pb-3 border-t border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between px-4">
-            <div>
-              <p className="text-sm font-medium text-gray-500 dark:text-gray-300">Theme</p>
-            </div>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-300">Theme</p>
             <motion.button
               whileHover={{ scale: 1.1, rotate: 5 }}
               whileTap={{ scale: 0.9 }}
