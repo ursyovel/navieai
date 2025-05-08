@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   MessageSquare,
@@ -21,6 +21,12 @@ import { motion } from 'framer-motion';
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const { theme } = useTheme();
+
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
+
+  const handleExternalClick = (url: string) => {
+    setRedirectUrl(url);
+  };
 
   const features = [
     {
@@ -111,7 +117,7 @@ const HomePage: React.FC = () => {
             <div className={`rounded-xl shadow-2xl overflow-hidden ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
               <div className="p-4 border-b dark:border-gray-800">
                 <div className="flex items-center">
-                <img src="/navie-icon.png" alt="Navie Icon" className="h-10 w-10 rounded-full" />
+                  <img src="/navie-icon.png" alt="Navie Icon" className="h-10 w-10 rounded-full" />
                   <div className="ml-3">
                     <h3 className="font-semibold text-gray-900 dark:text-white">Navie AI</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Online • A Simple Chatbot</p>
@@ -225,16 +231,16 @@ const HomePage: React.FC = () => {
           <p>
             Navie AI · Made by{' '}
             <button
-              onClick={() => window.open('https://yovel.vercel.app', '_blank')}
+              onClick={() => handleExternalClick('https://yovel.vercel.app')}
               className="text-purple-600 hover:underline transition"
             >
               Yovel
             </button>
           </p>
           <p className="mt-2">
-            Reach to us ·
+            Reach to us ·{' '}
             <button
-              onClick={() => window.open('https://instagram.com/__yovel', '_blank')}
+              onClick={() => handleExternalClick('https://instagram.com/__yovel')}
               className="text-purple-600 hover:underline transition"
             >
               Support
@@ -242,6 +248,34 @@ const HomePage: React.FC = () => {
           </p>
         </div>
       </footer>
+
+      {/* Redirect Popup */}
+      {redirectUrl && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl text-center w-[90%] max-w-md">
+            <p className="text-lg text-gray-900 dark:text-gray-100 mb-4">
+              You're about to be redirected to an external site.
+            </p>
+            <div className="flex justify-center space-x-4">
+              <button
+                onClick={() => {
+                  window.open(redirectUrl, '_blank');
+                  setRedirectUrl(null);
+                }}
+                className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+              >
+                Continue
+              </button>
+              <button
+                onClick={() => setRedirectUrl(null)}
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
