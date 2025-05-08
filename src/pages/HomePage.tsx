@@ -234,6 +234,7 @@ const HomePage: React.FC = () => {
             </button>
           </p>
           <p className="mt-2">
+            Reach to us ·
             <button
               onClick={() => window.open('https://instagram.com/__yovel', '_blank')}
               className="text-purple-600 hover:underline transition"
