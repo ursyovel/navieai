@@ -33,7 +33,6 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return savedHistory ? JSON.parse(savedHistory) : [];
   });
 
-  // Initialize a session if none exists
   useEffect(() => {
     if (!currentSession && chatHistory.length === 0) {
       startNewChat();
@@ -42,13 +41,11 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [currentSession, chatHistory]);
 
-  // Save chat history to localStorage
   useEffect(() => {
     localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
   }, [chatHistory]);
 
   const generateResponse = (userMessage: string): string => {
-    // In a real implementation, this would call an AI API
     const responses = [
       "I'm Navie AI, a simple chatbot. How can I help you today?",
       "That's an interesting question. Let me think about that...",
@@ -69,21 +66,19 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
       timestamp: new Date(),
     };
 
-    // Update current session with user message
-    const updatedSession = {
+    const updatedSession: ChatSession = {
       ...currentSession,
       messages: [...currentSession.messages, userMessage],
       updatedAt: new Date(),
     };
+
     setCurrentSession(updatedSession);
 
-    // Update chat history
-    const updatedHistory = chatHistory.map(session => 
+    const updatedHistory = chatHistory.map(session =>
       session.id === currentSession.id ? updatedSession : session
     );
     setChatHistory(updatedHistory);
 
-    // Generate AI response (with a small delay to simulate thinking)
     setTimeout(() => {
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
@@ -92,16 +87,18 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
         timestamp: new Date(),
       };
 
-      const sessionWithResponse = {
+      const sessionWithResponse: ChatSession = {
         ...updatedSession,
         messages: [...updatedSession.messages, aiResponse],
         updatedAt: new Date(),
       };
 
       setCurrentSession(sessionWithResponse);
-      setChatHistory(updatedHistory.map(session => 
-        session.id === currentSession.id ? sessionWithResponse : session
-      ));
+      setChatHistory(prev =>
+        prev.map(session =>
+          session.id === sessionWithResponse.id ? sessionWithResponse : session
+        )
+      );
     }, 1000);
   };
 
@@ -126,19 +123,26 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const clearHistory = () => {
+    // Reset state and localStorage
     setChatHistory([]);
-    startNewChat();
+    setCurrentSession(null);
+    localStorage.removeItem('chatHistory');
+
+    // Defer new chat to ensure UI refreshes correctly
+    setTimeout(() => {
+      startNewChat();
+    }, 0);
   };
 
   return (
-    <ChatContext.Provider 
-      value={{ 
-        currentSession, 
-        chatHistory, 
-        sendMessage, 
+    <ChatContext.Provider
+      value={{
+        currentSession,
+        chatHistory,
+        sendMessage,
         startNewChat,
         selectChatSession,
-        clearHistory 
+        clearHistory,
       }}
     >
       {children}
