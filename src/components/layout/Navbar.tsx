@@ -42,21 +42,19 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
                   Beta
                 </span>
               </motion.div>
-            </Link>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-  <a
-    href="/"
-    className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+              <span className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
   >
     Home
-  </a>
+  </span>
 
-  <a
-    href="/#features"
+  <span href="/#features"
     className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
   >
     Features
-  </a>
+  </span>
+            </Link>
+            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+
 
               <motion.button 
                 whileHover={{ scale: 1.05 }}
