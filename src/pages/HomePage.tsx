@@ -13,7 +13,7 @@ import {
   Lock,
   Sparkles,
   Clock,
-  Key, // ✅ This was missing
+  Key, 
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { motion } from 'framer-motion';
@@ -220,6 +220,30 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </section>
+      <footer className="bg-gray-100 dark:bg-gray-900 border-t border-gray-300 dark:border-gray-700 py-6">
+      <div className="max-w-7xl mx-auto px-4 text-center text-sm text-gray-700 dark:text-gray-300">
+        <p>
+          Navie AI · Made by{" "}
+          <button
+            onClick={() => redirect("https://yovel.vercel.app")}
+            className="text-purple-600 hover:underline transition"
+          >
+            Yovel
+          </button>
+        </p>
+        <p className="mt-2">
+          <button
+            onClick={() => redirect("https://instagram.com/__yovel")}
+            className="text-purple-600 hover:underline transition"
+          >
+            Support
+          </button>
+        </p>
+      </div>
+    </footer>
+  );
+};
+
     </div>
   );
 };
