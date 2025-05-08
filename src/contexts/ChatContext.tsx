@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 
 export interface Message {
   id: string;
@@ -32,6 +33,8 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const savedHistory = localStorage.getItem('chatHistory');
     return savedHistory ? JSON.parse(savedHistory) : [];
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (!currentSession && chatHistory.length === 0) {
@@ -74,10 +77,11 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     setCurrentSession(updatedSession);
 
-    const updatedHistory = chatHistory.map(session =>
-      session.id === currentSession.id ? updatedSession : session
+    setChatHistory(prev =>
+      prev.map(session =>
+        session.id === updatedSession.id ? updatedSession : session
+      )
     );
-    setChatHistory(updatedHistory);
 
     setTimeout(() => {
       const aiResponse: Message = {
@@ -112,7 +116,7 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     setCurrentSession(newSession);
-    setChatHistory([newSession, ...chatHistory]);
+    setChatHistory(prev => [newSession, ...prev]);
   };
 
   const selectChatSession = (sessionId: string) => {
@@ -122,16 +126,18 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const clearHistory = () => {
-    // Reset state and localStorage
+  const confirmClearHistory = () => {
     setChatHistory([]);
     setCurrentSession(null);
     localStorage.removeItem('chatHistory');
-
-    // Defer new chat to ensure UI refreshes correctly
+    setShowModal(false);
     setTimeout(() => {
       startNewChat();
     }, 0);
+  };
+
+  const clearHistory = () => {
+    setShowModal(true);
   };
 
   return (
@@ -146,6 +152,34 @@ export const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }}
     >
       {children}
+
+      {/* Confirmation Modal */}
+      {showModal &&
+        ReactDOM.createPortal(
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-80">
+              <h2 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Clear Chat History?</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                Are you sure you want to delete all chat history? This cannot be undone.
+              </p>
+              <div className="flex justify-end space-x-3">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-1 text-sm bg-gray-300 hover:bg-gray-400 text-black rounded"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={confirmClearHistory}
+                  className="px-4 py-1 text-sm bg-red-500 hover:bg-red-600 text-white rounded"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>,
+          document.body
+        )}
     </ChatContext.Provider>
   );
 };
