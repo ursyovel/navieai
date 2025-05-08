@@ -44,16 +44,20 @@ const Navbar: React.FC<NavbarProps> = ({ onExternalLinkClick }) => {
               </motion.div>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-            <span className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-  >
-    Home
-  </span>
+            <button
+  onClick={() => (window.location.href = 'https://navieai.vercel.app/')}
+  className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+>
+  Home
+</button>
 
-  <span href="/#features"
-    className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-  >
-    Features
-  </span>
+<button
+  onClick={() => (window.location.href = 'https://navieai.vercel.app/#features')}
+  className="border-transparent text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-white hover:border-gray-300 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+>
+  Features
+</button>
+
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
 
