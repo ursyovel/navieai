@@ -108,7 +108,7 @@ const ChatInterface: React.FC = () => {
           )}
           <div ref={messagesEndRef} />
         </div>
-      </div>
+      </div> 
 
       {/* Input area */}
       <div className="border-t dark:border-gray-700 p-4 bg-white dark:bg-gray-900">
@@ -147,7 +147,7 @@ const ChatInterface: React.FC = () => {
             </div>
           </div>
           <div className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
-            Navie AI • a simple chatbot
+            Navie AI • Made by yovel
           </div>
         </div>
       </div>
