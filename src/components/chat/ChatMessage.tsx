@@ -25,15 +25,19 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
       <div className={`flex max-w-[80%] ${isAi ? 'flex-row' : 'flex-row-reverse'}`}>
         {/* Avatar */}
         <div className={`flex-shrink-0 ${isAi ? 'mr-3' : 'ml-3'}`}>
-          <div className={`h-8 w-8 rounded-full flex items-center justify-center ${
-            isAi 
-              ? 'bg-gradient-to-r from-purple-600 to-pink-500' 
-              : 'bg-gray-200 dark:bg-gray-700'
-          }`}>
-            <span className="text-white text-xs font-semibold">
-              {isAi ? 'N' : 'U'}
-            </span>
-          </div>
+          {isAi ? (
+            <img 
+              src="/navie-icon.png" 
+              alt="Navie AI" 
+              className="h-8 w-8 rounded-full object-cover shadow-md"
+            />
+          ) : (
+            <div className="h-8 w-8 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700">
+              <span className="text-black dark:text-white text-xs font-semibold">
+                You
+              </span>
+            </div>
+          )}
         </div>
         
         {/* Message content */}
