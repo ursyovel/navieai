@@ -249,33 +249,39 @@ const HomePage: React.FC = () => {
         </div>
       </footer>
 
-      {/* Redirect Popup */}
       {redirectUrl && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl text-center w-[90%] max-w-md">
-            <p className="text-lg text-gray-900 dark:text-gray-100 mb-4">
-              You're about to be redirected to an external site.
-            </p>
-            <div className="flex justify-center space-x-4">
-              <button
-                onClick={() => {
-                  window.open(redirectUrl, '_blank');
-                  setRedirectUrl(null);
-                }}
-                className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
-              >
-                Continue
-              </button>
-              <button
-                onClick={() => setRedirectUrl(null)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+  <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-xl text-center w-[90%] max-w-md">
+      <p className="text-lg text-gray-900 dark:text-gray-100 mb-4">
+        You're about to be redirected to an external site.
+      </p>
+
+      {/* Rectangle box showing the URL */}
+      <div className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-3 rounded-md mb-4 break-all border border-gray-300 dark:border-gray-600 text-sm">
+        {redirectUrl}
+      </div>
+
+      <div className="flex justify-center space-x-4">
+        <button
+          onClick={() => {
+            window.open(redirectUrl, '_blank');
+            setRedirectUrl(null);
+          }}
+          className="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+        >
+          Continue
+        </button>
+        <button
+          onClick={() => setRedirectUrl(null)}
+          className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
