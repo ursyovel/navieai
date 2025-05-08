@@ -111,9 +111,7 @@ const HomePage: React.FC = () => {
             <div className={`rounded-xl shadow-2xl overflow-hidden ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
               <div className="p-4 border-b dark:border-gray-800">
                 <div className="flex items-center">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center">
-  <img src="/navie-icon.png" alt="Navie Icon" className="h-6 w-6 rounded-full" />
-</div>
+                <img src="/navie-icon.png" alt="Navie Icon" className="h-10 w-10 rounded-full" />
                   <div className="ml-3">
                     <h3 className="font-semibold text-gray-900 dark:text-white">Navie AI</h3>
                     <p className="text-xs text-gray-500 dark:text-gray-400">Online • A Simple Chatbot</p>
